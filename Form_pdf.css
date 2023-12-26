@@ -52,7 +52,7 @@ body{
     height: 100%;
     flex-shrink: 0;
     border-radius: 25px 25px 0px 0px;
-    background-image: url(BG 2.png);
+    background-image: url("BG_2.png");
     margin-top: 2px;
     padding-bottom: 20px;
     padding-right: 5px;
