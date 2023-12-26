@@ -2,7 +2,7 @@ body{
     width: 360px;
     height: 100%;
     flex-shrink: 0;
-    background: url(../Images/Rect\ Light.svg), lightgray 50% / cover no-repeat;
+    background: url(Rect Light.svg), lightgray 50% / cover no-repeat;
     margin: 0;
 }
 
