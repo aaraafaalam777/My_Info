@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Your Small Info</title>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
+      <link rel="stylesheet" href="../CSS/Pdf_file.css">
+   </head>
+<body>
+
+<img id="preview" src="../Images/Passport_photo.jpg" height="200" alt="Image preview..."><br>
+
+<input type="file" id="upload" onchange="previewFile()">
+<form action="">
+<input type="text" id="Name" placeholder=" Enter Your Name ..." required><br>
+<input type="text" id="Father" placeholder=" Enter Father's Name ..." required><br>
+<input type="text" id="Mother" placeholder=" Enter Mother's Name ..." required><br>
+<input type="text" id="POB" placeholder=" Enter Place of Birth ..." required><br>
+<button onclick="download()">SUBMIT</button>
+</form>
+
+<script>
+function previewFile() {
+   var preview = document.querySelector('img');
+   var file    = document.querySelector('input[type=file]').files[0];
+   var reader  = new FileReader();
+
+   reader.onloadend = function () {
+      preview.src = reader.result;
+   }
+
+   if (file) {
+      reader.readAsDataURL(file);
+   } else {
+      preview.src = "";
+   }
+}
+
+function download() {
+   var imgData = document.querySelector('img').src;
+   var Name = document.getElementById('Name').value;
+   var Father = document.getElementById('Father').value;
+   var Mother = document.getElementById('Mother').value;
+   var POB = document.getElementById('POB').value;
+
+   if (!imgData || !Name || !Father || !Mother || !POB) {
+      alert("Please fill in all fields before submitting.");
+      return;
+   }
+
+   var pdf = new jsPDF();
+
+   pdf.setFillColor(232, 210, 153); // Set the fill color to red
+    pdf.rect(0, 0, 210, 297, 'F'); //Fill the entire page
+    pdf.rect(2, 2, 205, 230);
+    pdf.setFont('courier');
+    pdf.setFontSize(23);
+    pdf.text('Your small Info !', 67, 20);
+    pdf.text('______________',71, 23);
+    pdf.rect(85, 60, 40, 40); // A Box
+    pdf.addImage(imgData, 'JPEG', 85, 60, 40, 40);
+    pdf.setFontSize(15);
+    pdf.text('Name: '+ Name, 70, 120);
+    pdf.text('Name of Father: '+ Father, 70, 130);
+    pdf.text('Name of Mother: '+ Mother, 70, 140);
+    pdf.text('Place of Birth: '+ POB, 70, 150);
+    pdf.setFontSize(7);
+    pdf.text('Copyright 2023, Arafat Alam. All Rights Reserved', 70, 230);
+    pdf.save("My_Info.pdf");
+}
+</script>
+
+</body>
+</html>
